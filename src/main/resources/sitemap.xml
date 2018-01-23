@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemap>
+	<channel name="用户管理">
+		<subMenu name="用户列表" />
+		<subMenu name="用户统计" />
+		<subMenu name="角色配置" />
+	</channel>
+	
+	<channel name="文档浏览">
+		<subMenu name="文档列表" />
+		<subMenu name="文档统计" />
+	</channel>
+	
+	<channel name="X数据浏览">
+		<subMenu name="X数据列表" />
+		<subMenu name="X数据统计" />
+	</channel>
+	
+	<channel name="联系方式" />
+
+</sitemap>

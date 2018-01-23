@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Index</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="w3css/4/w3.css" />
+<script src="jquery/3.2.1/jquery.min.js"></script>
+<script src="bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="angular.js/1.6.4/angular.min.js"></script>
+<script src="index.js"></script>
+</head>
+<body data-ng-app="myApp" data-ng-controller="myCtrl">
+
+	<div class="w3-top">
+		<!-- Nav -->
+		<div id="myNavigation" class="w3-bar w3-black">
+			<a id="sidebarBtn" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-menu-hamburger"></span></a> 
+			<a id="index" class="w3-bar-item w3-button" href="#"><span class="glyphicon glyphicon-home"></span></a>
+			<a id="navigation" class="w3-bar-item w3-button" 
+			data-ng-repeat="nav in navigationList" data-ng-click="navigate()" >{{ nav }}</a>
+			<a id="logout" class="w3-bar-item w3-button w3-right"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="mySidebar" class="w3-sidebar w3-light-grey w3-bar-block w3-animate-left" style="width: 10%; display: none;">
+			<a href="#" class="w3-bar-item w3-button" data-ng-repeat="bar in sidebarList" data-ng-click="sidebarAction()">{{ bar }}</a>
+		</div>
+	</div>
+
+	<!-- Content -->
+	<div id="myPageContent" class="content">
+		<iframe width="100%"></iframe>
+	</div>
+
+	<script type="text/javascript">
+		var href = "http://localhost:8080/";
+		// 初始化content内容， 默认为welcome首页
+		var welcome = href + "welcome";
+		$('iframe').attr('src', welcome);
+		var contentHeight = window.screen.availHeight - $("#myNavigation").height();
+		$('iframe').attr('height', contentHeight);
+		$('iframe').css("padding", $("#myNavigation").height());
+		initNavigation();
+		
+		//点击home按钮，跳转至首页
+		$("#index").click(function(){
+			var welcome = href + "welcome";
+			$('iframe').attr('src', welcome);
+		});
+	</script>
+
+</body>
+</html>

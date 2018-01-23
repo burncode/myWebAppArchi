@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Page Template</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="w3css/4/w3.css" />
+<script src="jquery/3.2.1/jquery.min.js"></script>
+<script src="bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="angular.js/1.6.4/angular.min.js"></script>
+</head>
+
+<body data-ng-app="myApp" data-ng-controller="myCtrl">
+	
+	<div class="w3-top">
+		<!-- Nav -->
+		<div id="myNavigation" class="w3-bar w3-black">
+			<a id="sidebarBtn" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+			<a href="#" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-home"></span></a>	<!-- 首页 -->
+			<a href="#" class="w3-bar-item w3-button" data-ng-repeat="nav in navigationList">{{ nav }}</a> 	<!-- 频道页 -->
+			<a href="#" class="w3-bar-item w3-button w3-right"><span class="glyphicon glyphicon-log-out"></span></a>	<!-- 退出 -->
+		</div>
+		
+		<!-- Sidebar -->
+		<div id="mySidebar" class="w3-sidebar w3-light-grey w3-bar-block w3-animate-left" style="width: 10%" >
+			<a href="#" class="w3-bar-item w3-button" data-ng-repeat="bar in sidebarList">{{ bar }}</a>
+		</div>
+	</div>
+
+	<!-- Content -->
+	<div id="myPageContent" class="content">
+		<iframe width="100%"></iframe>
+	</div>
+
+	<script type="text/javascript">
+	
+		//初始化导航栏和侧边栏
+		var app = angular.module("myApp", []);
+		app.controller("myCtrl", function($scope) {
+			//TODO: 从后台获取导航栏列表
+			var navigation = ['Project','Contact','About'];
+			$scope.navigationList = navigation;
+			//TODO: 从后台获取侧边栏列表
+			var sidebar = [ 'link 1', 'link 2', 'link 3', 'link 4', 'link 5' ];
+			$scope.sidebarList = sidebar;
+		});
+		
+		//初始化content内容
+		var href = "http://localhost:8080/myTemplate?pageName=pt-content-table";
+		$('iframe').attr('src', href);
+		var contentHeight = window.screen.availHeight - $("#myNavigation").height();
+		$('iframe').attr('height', contentHeight);
+		$('iframe').css("padding",$("#myNavigation").height());
+		
+		//侧边栏列表支持隐藏
+		var showSidebar = true;
+		$("#sidebarBtn").click(function() {
+			if (showSidebar == false) {
+				$("#myPageContent").css("marginLeft", "10%");
+				$("#mySidebar").css("width", "10%");
+				$("#mySidebar").css("display", "block");
+				showSidebar = true;
+			} else {
+				$("#myPageContent").css("marginLeft", "0%");
+				$("#mySidebar").css("width", "10%");
+				$("#mySidebar").css("display", "none");
+				showSidebar = false;
+			}
+		});
+		
+	</script>
+</body>
+</html>
